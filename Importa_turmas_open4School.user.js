@@ -8,8 +8,8 @@
 // @match        http://sigeduca.seduc.mt.gov.br/ged/hwmgrhturma.aspx?*
 // @grant        none
 // @require      https://code.jquery.com/jquery-3.6.0.min.js
-// @updateURL    https://raw.githubusercontent.com/lksoumon/AnaliseDiariosSigeduca/main/ConferidorDiariosClasse.user.js
-// @downloadURL   https://raw.githubusercontent.com/lksoumon/AnaliseDiariosSigeduca/main/ConferidorDiariosClasse.user.js  
+// @updateURL    https://github.com/lksoumon/integraOpen4School/raw/main/Importa_turmas_open4School.user.js
+// @downloadURL   https://github.com/lksoumon/integraOpen4School/raw/main/Importa_turmas_open4School.user.js  
 // ==/UserScript==
 
 let turmaNome;
