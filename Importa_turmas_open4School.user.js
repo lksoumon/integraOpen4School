@@ -1,17 +1,22 @@
 // ==UserScript==
 // @name         Importação open4School
 // @namespace    http://tampermonkey.net/
-// @version      0.2
+// @version      0.3
 // @description  Faz a importação de dados entre sigeduca e Open
 // @author       Lucas Monteiro
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
 // @match        http://sigeduca.seduc.mt.gov.br/ged/hwmgrhturma.aspx?*
 // @grant        none
 // @require      https://code.jquery.com/jquery-3.6.0.min.js
-// @updateURL    https://github.com/lksoumon/integraOpen4School/raw/main/Importa_turmas_open4School.user.js
-// @downloadURL   https://github.com/lksoumon/integraOpen4School/raw/main/Importa_turmas_open4School.user.js  
 // ==/UserScript==
 
+function isFutureDate(dateInput) {
+    const [day, month, year] = dateInput.split('/').map(Number);
+    const inputDate = new Date(year + 2000, month - 1, day);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return inputDate > today;
+}
 let turmaNome;
 // Estilos CSS
     var styles = `
@@ -160,10 +165,11 @@ function carregaDados(){
             let matriz = document.getElementById('span_vGERMATDSC_'+("0000" + n).slice(-4)).innerText.trim();
             var m = 1;
             for (let j = 0; j < tabelas[i].getElementsByTagName('tr').length; j++) {
-                
+
                 if(j!=0){
-                    if(document.getElementById('span_vSITUACAOTURMA_'+("0000" + m).slice(-4)+("0000" + n).slice(-4)).innerText.trim()=="Encerrada"){continue;}
-                    console.log(m,n,document.getElementById('span_vSITUACAOTURMA_'+("0000" + m).slice(-4)+("0000" + n).slice(-4)).innerText.trim());//span_vSITUACAOTURMA_00010009
+                    //console.log(m,n,document.getElementById('span_vGERTURDTAFIM_'+("0000" + m).slice(-4)+("0000" + n).slice(-4)).innerText.trim());//span_vSITUACAOTURMA_00010009
+                    if(!isFutureDate(document.getElementById('span_vGERTURDTAFIM_'+("0000" + m).slice(-4)+("0000" + n).slice(-4)).innerText.trim())){continue;}
+
                     m++;
                     temp.push(matriz);
                     for (let k = 0; k < tabelas[i].getElementsByTagName('tr')[j].getElementsByTagName('span').length; k++) {
@@ -177,7 +183,7 @@ function carregaDados(){
             n++;
         }
     }
-    console.log(output);
+    //console.log(output);
     //return output;
 
 }
