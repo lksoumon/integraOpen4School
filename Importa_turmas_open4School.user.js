@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Importação open4School
 // @namespace    http://tampermonkey.net/
-// @version      0.3
+// @version      0.4
 // @description  Faz a importação de dados entre sigeduca e Open
 // @author       Lucas Monteiro
 // @icon         data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==
@@ -17,6 +17,11 @@ function isFutureDate(dateInput) {
     today.setHours(0, 0, 0, 0);
     return inputDate > today;
 }
+
+function removirgula(str) {
+    return str.replace(/,/g, '');
+}
+
 let turmaNome;
 // Estilos CSS
     var styles = `
@@ -261,7 +266,7 @@ function coletaDados() {
                      "nome do responsável 1","CPF do responsável 1","DDD Residencial","Tel Res Resp 1","DDD Celular","Tel Celular Resp 1","DDD Comercial","Tel Comercial Resp 1","DDD Contato","Tel Contato Resp 1","E-mail Resp 1",
                       "Nome do responsável 2","CPF do responsável 2","DDD Residencial","Tel Res Resp 2","DDD Celular","Tel Celular Resp 2","DDD Comercial","Tel Comercial Resp 2","DDD Contato","Tel Contato Resp 2","E-mail Resp 2",
                       "DDD Residencial","Tel Residencial",'DDD Celular','Tel Celular','DDD Comercial','Tel Comercial','DDD Contato','Tel Contato',
-                      'Endereço Rua','Número','Complemento','Bairro','Cidade','UF','CEP','UC (Distribuidora)','Nº UC','Localização'
+                      'Endereço Rua','Número','Complemento','Bairro','Cidade','UF','CEP','UC (Distribuidora)','Nº UC','Localização','Nome Social'
                      ];
 
     carregamento.style.display = "block";
@@ -277,7 +282,7 @@ function coletaDados() {
         parent.frames[0].document.getElementById('span_CTLGERPESNOM').innerHTML,// cabecalho = cabecalho+"Aluno;";
         parent.frames[0].document.getElementById('span_CTLGERPESCPF').innerHTML.replace(/^([\d]{3})([\d]{3})([\d]{3})([\d]{2})$/, "$1.$2.$3-$4") , //cabecalho = cabecalho+"CPF do Aluno;";
         parent.frames[0].document.getElementById('span_CTLGERPESRG').innerHTML ,// cabecalho = cabecalho+"RG do aluno;";
-        parent.frames[0].document.getElementById('span_CTLGERORGEMICOD').innerHTML, //cabecalho = cabecalho+"Órgão Expedidor;";
+        removirgula(parent.frames[0].document.getElementById('span_CTLGERORGEMICOD').innerHTML), //cabecalho = cabecalho+"Órgão Expedidor;";
         parent.frames[0].document.getElementById('span_CTLGERPESUFEXP').innerHTML, //cabecalho = cabecalho+UF Expedidor;";
         parent.frames[0].document.getElementById('span_CTLGERPESDTAEXP').innerHTML, //cabecalho = cabecalho+"Data Expedição;";
         parent.frames[0].document.getElementById('span_CTLGERPESSEXO').innerHTML , //cabecalho = cabecalho+"Sexo do Aluno;";
@@ -334,6 +339,7 @@ function coletaDados() {
         parent.frames[0].document.getElementById('span_CTLGERPESDISTCOD').innerHTML, //cabecalho = cabecalho+"UC (Distribuidora);";
         parent.frames[0].document.getElementById('span_CTLGERPESUC').innerHTML,// cabecalho = cabecalho+"Nº UC;";
         parent.frames[0].document.getElementById('span_CTLGERPESLOCRES').innerHTML,// cabecalho = cabecalho+"Localização;";
+        parent.frames[0].document.getElementById('span_CTLGERPESNOMSOC').innerHTML.replace(/['"]/g, "`"),// cabecalho = cabecalho+"Nome Social;";
         ];
 
         //txtareaDados.value = cabecalho+"\n"+a;
