@@ -8,8 +8,8 @@
 // @match       http://sigeduca.seduc.mt.gov.br/ged/hwmconaluno.aspx
 // @icon        https://www.google.com/s2/favicons?sz=64&domain=gov.br
 // @require     https://code.jquery.com/jquery-3.6.0.min.js
-// @updateURL    https://github.com/lksoumon/integraOpen4School/raw/refs/heads/main/Importa_turmas_open4School.user.js
-// @downloadURL   https://github.com/lksoumon/integraOpen4School/raw/refs/heads/main/Importa_turmas_open4School.user.js
+// @updateURL    https://github.com/lksoumon/integraOpen4School/raw/refs/heads/main/unico.aluno.user.js
+// @downloadURL   https://github.com/lksoumon/integraOpen4School/raw/refs/heads/main/unico.aluno.user.js
 // @grant       none
 // ==/UserScript==
 
